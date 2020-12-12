@@ -34,7 +34,6 @@ export default function Form(props) {
     setPassword(event.target.value);
   };
   const handleSubmit = () => {
-    event.preventDefault();
     if (
       name === "" ||
       email === "" ||
