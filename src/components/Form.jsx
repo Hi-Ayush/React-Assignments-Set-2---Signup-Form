@@ -63,7 +63,7 @@ export default function Form() {
       return;
     }
 
-    if (!phoneRegEx.test(phoneNo)) {
+    if (isNaN(phoneNo)) {
       setErrorMessage("Phone Number must contain only numbers");
       setUserName("");
       return;
