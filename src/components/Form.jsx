@@ -51,7 +51,7 @@ export default function Form() {
       return;
     }
 
-    if (email.indexOf("@") === -1) {
+    if (email.indexOf("@") < 1) {
       setErrorMessage("Email must conatin @");
       setUserName("");
       return;
