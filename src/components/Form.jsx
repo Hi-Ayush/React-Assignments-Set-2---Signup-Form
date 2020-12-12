@@ -42,30 +42,36 @@ export default function Form() {
       password === ""
     ) {
       setErrorMessage("All fields are mandatory");
+      setUserName("");
       return;
     }
     if (!nameRegEx.test(name)) {
       setErrorMessage("Name is not alphanumeric");
+      setUserName("");
       return;
     }
 
     if (email.indexOf("@") === -1) {
       setErrorMessage("Email must conatin @");
+      setUserName("");
       return;
     }
 
     if (!(gender === "male" || gender === "female" || gender === "others")) {
       setErrorMessage("Please identify as male, female or others");
+      setUserName("");
       return;
     }
 
     if (!phoneRegEx.test(phoneNo)) {
       setErrorMessage("Phone Number must contain only numbers");
+      setUserName("");
       return;
     }
 
     if (password.length < 6) {
       setErrorMessage("Password must contain atleast 6 letters");
+      setUserName("");
       return;
     }
 
