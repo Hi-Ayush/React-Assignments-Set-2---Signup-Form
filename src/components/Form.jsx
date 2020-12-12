@@ -49,7 +49,7 @@ export default function Form() {
       return;
     }
 
-    if (email.includes("@") === false) {
+    if (email.indexOf("@") === -1) {
       setErrorMessage("Email must conatin @");
       setUserName("");
       return;
