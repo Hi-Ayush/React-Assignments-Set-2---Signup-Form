@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-export default function Form(props) {
+export default function Form() {
   const [gender, setGender] = useState("male");
 
   const [errorMessage, setErrorMessage] = useState("");
