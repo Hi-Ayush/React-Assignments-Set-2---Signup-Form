@@ -14,7 +14,7 @@ export default function Form() {
 
   const nameRegEx = /^([a-zA-Z0-9 _-]+)$/;
 
-  const phoneRegEx = /^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g;
+  const phoneRegEx = /^\d+$/;
 
   const handleName = (event) => {
     setName(event.target.value);
