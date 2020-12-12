@@ -21,7 +21,7 @@ export default function Form(props) {
   };
   const handleEmail = (event) => {
     setEmail(event.target.value);
-    console.log(email);
+    // console.log(email);
   };
   const handleGender = (event) => {
     setGender(event.target.value);
