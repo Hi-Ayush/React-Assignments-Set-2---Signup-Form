@@ -2,20 +2,18 @@ import React from "react";
 import { useState } from "react";
 export default function Form(props) {
   const [gender, setGender] = useState("male");
-  const [finalError, setFinalError] = useState("");
+
   const [errorMessage, setErrorMessage] = useState("");
-  const [invalidInputCount, setInvalidInputCount] = useState(5);
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phoneNo, setPhoneNo] = useState("");
-  const [allValid, setAllValid] = useState(false);
+
   const [userName, setUserName] = useState("");
 
   const nameRegEx = /^([a-zA-Z0-9 _-]+)$/;
-  const EmailRegex = RegExp(
-    /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
-  );
+
   const phoneRegEx = /^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g;
 
   const handleName = (event) => {
@@ -36,48 +34,49 @@ export default function Form(props) {
     setPassword(event.target.value);
   };
   const handleSubmit = () => {
-    console.log(name);
-
-    console.log(email);
+    event.preventDefault();
+    if (
+      name === "" ||
+      email === "" ||
+      phoneNo === "" ||
+      gender === "" ||
+      password === ""
+    ) {
+      setErrorMessage("All fields are mandatory");
+      return;
+    }
     if (!nameRegEx.test(name)) {
       setErrorMessage("Name is not alphanumeric");
-    } else {
-      setInvalidInputCount(invalidInputCount - 1);
+      return;
     }
-    if (!EmailRegex.test(email)) {
+
+    if (email.indexOf("@") === -1) {
       setErrorMessage("Email must conatin @");
-    } else {
-      setInvalidInputCount(invalidInputCount - 1);
+      return;
     }
-    if (!(gender === "female" || gender === "others")) {
+
+    if (!(gender === "male" || gender === "female" || gender === "others")) {
       setErrorMessage("Please identify as male, female or others");
-    } else {
-      setInvalidInputCount(invalidInputCount - 1);
+      return;
     }
+
     if (!phoneRegEx.test(phoneNo)) {
       setErrorMessage("Phone Number must contain only numbers");
-    } else {
-      setInvalidInputCount(invalidInputCount - 1);
+      return;
     }
+
     if (password.length < 6) {
       setErrorMessage("Password must contain atleast 6 letters");
-    } else {
-      setInvalidInputCount(invalidInputCount - 1);
+      return;
     }
 
-    if (invalidInputCount > 1) {
-      setErrorMessage("All fields are mandatory");
-    }
-    if (errorMessage === "") {
-      setUserName(email.substring(0, email.indexOf("@")));
-      setAllValid(true);
-    }
-
-    console.log(allValid, userName, errorMessage);
+    setUserName(email.substring(0, email.indexOf("@")));
+    setErrorMessage("");
   };
   return (
     <>
-      {allValid ? <h3>Hello {userName}</h3> : <h3>{errorMessage}</h3>}
+      {errorMessage && <h3>{errorMessage}</h3>}
+      {userName && <h3>Hello {userName}</h3>}
       <label for="name">Name :</label>
       <br />
       <input type="text" id="name" onChange={handleName} data-testid="name" />
